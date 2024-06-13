@@ -16,3 +16,4 @@ Added todo item: New task | Created at: 13/06 13:25
 Added todo item: new task | Created at: 13/06 13:25
 Deleted todo item: New task | Created at: 13/06 13:25
 Deleted todo item: new task | Created at: 13/06 13:25
+Added todo item: Add Garmin Products to Website | Created at: 13/06 13:31
