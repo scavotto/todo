@@ -66,6 +66,16 @@ def mark_todo_as_completed():
                 file.write(log_message + '\n')
             
             print('Todo item marked as completed.')
+            
+            # Automatically delete the completed todo item
+            deleted_todo = todo_items.pop(todo_id)
+            save_todos()
+            
+            with open(CHANGELOG_FILE, 'a') as file:
+                log_message = f"Deleted completed todo item: {deleted_todo.title} | Created at: {deleted_todo.created_at} | Completed at: {deleted_todo.completed_at}"
+                file.write(log_message + '\n')
+            
+            print('Completed todo item automatically deleted.')
         else:
             print('Todo item is already completed.')
     except IndexError:

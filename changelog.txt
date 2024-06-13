@@ -12,3 +12,7 @@ Added todo item: Test task | Created at: 13/06 13:06
 Deleted todo item: Test task | Created at: 13/06 13:06
 Added todo item: test task | Created at: 13/06 13:07
 Deleted todo item: test task | Created at: 13/06 13:07
+Added todo item: New task | Created at: 13/06 13:25
+Added todo item: new task | Created at: 13/06 13:25
+Deleted todo item: New task | Created at: 13/06 13:25
+Deleted todo item: new task | Created at: 13/06 13:25
