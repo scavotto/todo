@@ -12,6 +12,7 @@ class TodoItem:
         self.created_at = created_at
         self.is_completed = is_completed
         self.completed_at = completed_at
+        self.logged = False
 
 def save_todos():
     with open(TODO_FILE, 'wb') as file:
@@ -19,7 +20,7 @@ def save_todos():
     
     with open(CHANGELOG_FILE, 'a') as file:
         for todo_item in todo_items:
-            if not hasattr(todo_item, 'logged'):
+            if not todo_item.logged:
                 action = 'Added' if not todo_item.is_completed else 'Completed'
                 log_message = f"{action} todo item: {todo_item.title} | Created at: {todo_item.created_at}"
                 if todo_item.is_completed:
@@ -59,12 +60,8 @@ def mark_todo_as_completed():
         if not todo_item.is_completed:
             todo_item.is_completed = True
             todo_item.completed_at = datetime.now()
+            todo_item.logged = False  # Reset the logged status
             save_todos()
-            
-            with open(CHANGELOG_FILE, 'a') as file:
-                log_message = f"Completed todo item: {todo_item.title} | Created at: {todo_item.created_at} | Completed at: {todo_item.completed_at}"
-                file.write(log_message + '\n')
-            
             print('Todo item marked as completed.')
         else:
             print('Todo item is already completed.')
