@@ -54,9 +54,14 @@ def mark_todo_as_completed():
     try:
         print_all_todos()
         todo_id = int(input('Enter the ID of the todo item: '))
-        todo_items[todo_id].is_completed = True
-        todo_items[todo_id].completed_at = datetime.now()
+        todo_item = todo_items[todo_id]
+        todo_item.is_completed = True
+        todo_item.completed_at = datetime.now()
         save_todos()
+        
+        with open(CHANGELOG_FILE, 'a') as file:
+            log_message = f"Completed todo item: {todo_item.title} | Created at: {todo_item.created_at} | Completed at: {todo_item.completed_at}"
+            file.write(log_message + '\n')
     except IndexError:
         print('Invalid todo ID')
     except ValueError:
