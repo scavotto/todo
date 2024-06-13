@@ -55,13 +55,19 @@ def mark_todo_as_completed():
         print_all_todos()
         todo_id = int(input('Enter the ID of the todo item: '))
         todo_item = todo_items[todo_id]
-        todo_item.is_completed = True
-        todo_item.completed_at = datetime.now()
-        save_todos()
         
-        with open(CHANGELOG_FILE, 'a') as file:
-            log_message = f"Completed todo item: {todo_item.title} | Created at: {todo_item.created_at} | Completed at: {todo_item.completed_at}"
-            file.write(log_message + '\n')
+        if not todo_item.is_completed:
+            todo_item.is_completed = True
+            todo_item.completed_at = datetime.now()
+            save_todos()
+            
+            with open(CHANGELOG_FILE, 'a') as file:
+                log_message = f"Completed todo item: {todo_item.title} | Created at: {todo_item.created_at} | Completed at: {todo_item.completed_at}"
+                file.write(log_message + '\n')
+            
+            print('Todo item marked as completed.')
+        else:
+            print('Todo item is already completed.')
     except IndexError:
         print('Invalid todo ID')
     except ValueError:
@@ -86,29 +92,3 @@ def show_options():
     while True:
         print('Welcome to TaskMaster!')
         user_choice = input('Type "a" to add a new todo, "p" to print all todos, "c" to mark a todo as completed, "d" to delete a todo, or "q" to quit: ').upper()
-        if user_choice == 'A':
-            add_todo()
-        elif user_choice == 'P':
-            print_all_todos()
-        elif user_choice == 'C':
-            mark_todo_as_completed()
-        elif user_choice == 'D':
-            delete_todo()
-        elif user_choice == 'Q':
-            print('Thank you for using TaskMaster!')
-            break
-        else:
-            print('Invalid choice! Please try again.')
-
-def first_time():
-    if os.path.exists(TODO_FILE):
-        read_todos()
-    else:
-        print('Welcome to TaskMaster!')
-        add_todo()
-
-if __name__ == '__main__':
-    os.system('cls' if os.name == "nt" else "clear")
-    print("\033[32;1m]")
-    first_time()
-    show_options()
